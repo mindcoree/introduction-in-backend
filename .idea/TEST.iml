@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/hw_1/env/Include" />
       <excludeFolder url="file://$MODULE_DIR$/hw_1/env/Lib" />
     </content>
     <orderEntry type="inheritedJdk" />
