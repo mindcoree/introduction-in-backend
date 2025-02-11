@@ -1,30 +1,29 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
 from .models import Todo
 from .forms import TodoForm
 
-class TodoListView(ListView):
-    model = Todo
-    template_name = 'todos/list.html'
-    context_object_name = 'todos'
+def todo_list(request):
+    todos = Todo.objects.all()
+    return render(request, 'todos/todo_list.html', {'todos': todos})
 
-class TodoDetailView(DetailView):
-    model = Todo
-    template_name = 'todos/detail.html'
+def todo_detail(request, id):
+    todo = get_object_or_404(Todo, id=id)
+    return render(request, 'todos/todo_detail.html', {'todo': todo})
 
-def create_todo(request):
+def todo_create(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('todo-list')
+            return redirect('todo_list')
     else:
         form = TodoForm()
-    return render(request, 'todos/create.html', {'form': form})
+    return render(request, 'todos/todo_form.html', {'form': form})
 
-class TodoDeleteView(DeleteView):
-    model = Todo
-    template_name = 'todos/delete.html'
-    success_url = reverse_lazy('todo-list')
+def todo_delete(request, id):
+    todo = get_object_or_404(Todo, id=id)
+    if request.method == 'POST':
+        todo.delete()
+        return redirect('todo_list')
+    return render(request, 'todos/todo_confirm_delete.html', {'todo': todo})
