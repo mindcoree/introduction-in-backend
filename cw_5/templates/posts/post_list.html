@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Посты{% endblock %}
+{% block content %}
+  <h1>Посты</h1>
+  {% if user.is_authenticated %}
+    <h4>Создать новый пост</h4>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+    <hr>
+  {% else %}
+    <p><a href="{% url 'login' %}">Войдите</a>, чтобы создать пост.</p>
+  {% endif %}
+
+  <ul class="list-group">
+    {% for post in posts %}
+      <li class="list-group-item">
+        <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a> — автор: {{ post.author.username }}
+      </li>
+    {% empty %}
+      <li class="list-group-item">Постов пока нет.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
