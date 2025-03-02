@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Добавить задачу{% endblock %}
+{% block content %}
+<h2 class="mb-4">Добавить новую задачу</h2>
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="id_title" class="form-label">Заголовок</label>
+    {{ form.title }}
+  </div>
+  <div class="mb-3">
+    <label for="id_description" class="form-label">Описание</label>
+    {{ form.description }}
+  </div>
+  <div class="mb-3">
+    <label for="id_due_date" class="form-label">Дата выполнения</label>
+    {{ form.due_date }}
+  </div>
+  <div class="mb-3">
+    <label for="id_status" class="form-label">Статус</label>
+    {{ form.status }}
+  </div>
+  <button type="submit" class="btn btn-primary">Добавить</button>
+  <a href="{% url 'todo_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

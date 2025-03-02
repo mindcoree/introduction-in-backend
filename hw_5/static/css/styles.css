@@ -1,0 +1,76 @@
+/* static/css/styles.css */
+
+/* Общие стили для всей страницы */
+body {
+  background-color: #f4f7f9;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Контейнер (обёртка) */
+.container {
+  background-color: #fff;
+  margin-top: 30px;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Заголовки */
+h2 {
+  color: #0056b3;
+}
+
+/* Кнопки (пример кастомизации) */
+.btn-primary {
+  background-color: #0056b3;
+  border: none;
+  border-radius: 4px;
+}
+.btn-primary:hover {
+  background-color: #004494;
+}
+.btn-danger {
+  background-color: #d9534f;
+  border: none;
+  border-radius: 4px;
+}
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+/* Формы */
+.form-control {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Таблицы */
+.table th {
+  background-color: #0056b3;
+  color: #fff;
+}
+.table td {
+  vertical-align: middle;
+}
+
+/* Алерты */
+.alert {
+  border-radius: 4px;
+}
+
+/* Навигация */
+.navbar {
+  border-bottom: 3px solid #004494;
+}
+.navbar-brand, .nav-link {
+  color: #ffffff !important;
+}
+.nav-link:hover {
+  color: #ffdd57 !important;
+}

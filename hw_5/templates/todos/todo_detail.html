@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Детали задачи{% endblock %}
+{% block content %}
+<h2 class="mb-4">{{ todo.title }}</h2>
+<div class="mb-3">
+  <strong>Описание:</strong> {{ todo.description }}
+</div>
+<div class="mb-3">
+  <strong>Дата выполнения:</strong> {{ todo.due_date }}
+</div>
+<div class="mb-3">
+  <strong>Статус:</strong>
+  {% if todo.status %}
+    <span class="badge bg-success">Выполнено</span>
+  {% else %}
+    <span class="badge bg-warning text-dark">В процессе</span>
+  {% endif %}
+</div>
+<a href="{% url 'todo_list' %}" class="btn btn-secondary">Назад к списку</a>
+{% endblock %}
