@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.description }}</p>
+  {% if post.picture %}
+    <img src="{{ post.picture.url }}" alt="{{ post.title }}" class="img-fluid">
+  {% endif %}
+  <p>Автор: {{ post.author.username }}</p>
+  <p>Тред: {{ post.thread.name }}</p>
+
+  {% if can_edit %}
+    <a href="{% url 'post_edit' post.pk %}" class="btn btn-secondary">Редактировать</a>
+  {% endif %}
+  {% if can_delete %}
+    <button id="delete-post" class="btn btn-danger">Удалить</button>
+    <script>
+      const csrfToken = '{{ csrf_token }}';
+      document.getElementById("delete-post").addEventListener("click", function(){
+        if (confirm("Вы уверены, что хотите удалить этот пост?")) {
+          fetch("{% url 'post_delete' post.pk %}", {
+            method: "DELETE",
+            headers: {
+              "X-CSRFToken": csrfToken,
+            },
+          })
+          .then(response => response.json())
+          .then(data => {
+            window.location.href = data.redirect;
+          });
+        }
+      });
+    </script>
+  {% endif %}
+{% endblock %}

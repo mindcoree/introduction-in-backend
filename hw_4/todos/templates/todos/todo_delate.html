@@ -1,0 +1,12 @@
+{% extends "todos/base.html" %}
+
+{% block content %}
+<h1>Удалить "{{ todo.title }}"?</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+</form>
+
+<a href="{% url 'todo_list_detail' todo.todo_list.id %}" class="btn btn-secondary mt-3">Отмена</a>
+{% endblock %}

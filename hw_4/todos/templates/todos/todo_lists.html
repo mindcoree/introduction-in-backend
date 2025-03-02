@@ -1,0 +1,17 @@
+{% extends "todos/base.html" %}
+
+{% block content %}
+<h1>Списки дел</h1>
+<ul>
+    {% for list in lists %}
+        <li><a href="{% url 'todo_list_detail' list.id %}">{{ list.title }}</a></li>
+    {% endfor %}
+</ul>
+
+<h2>Добавить новый список</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
+{% endblock %}

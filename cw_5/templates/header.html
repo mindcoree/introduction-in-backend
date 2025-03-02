@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">CW_5</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link" href="{% url 'post_list' %}">Все посты</a></li>
+      {% if user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'my_posts' %}">Мои посты</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выход</a></li>
+      {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Логин</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

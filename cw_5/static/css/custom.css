@@ -1,0 +1,77 @@
+/* custom.css */
+
+/* Глобальные стили для body */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Стили для навигационной панели */
+.navbar {
+  background-color: #343a40;
+  border-bottom: 2px solid #23272b;
+}
+
+.navbar .navbar-brand {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.navbar .nav-link {
+  color: #ffffff;
+}
+
+.navbar .nav-link:hover {
+  color: #ffc107;
+}
+
+/* Контейнер страницы */
+.container {
+  margin-top: 30px;
+}
+
+/* Стили для элементов списка постов */
+.list-group-item {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+/* Стили кнопок */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+/* Стили для детального отображения поста */
+.post-detail {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Стили для форм */
+form {
+  margin-bottom: 20px;
+}
+
+form .form-control {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}

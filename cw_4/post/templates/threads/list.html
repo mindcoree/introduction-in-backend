@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Обсуждения{% endblock %}
+
+{% block content %}
+<h1>Список обсуждений</h1>
+<ul>
+    {% for thread in threads %}
+        <li><a href="{% url 'thread_detail' thread.id %}">{{ thread.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<h2>Создать обсуждение</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Создать</button>
+</form>
+{% endblock %}

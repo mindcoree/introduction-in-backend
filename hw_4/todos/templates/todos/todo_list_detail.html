@@ -1,0 +1,29 @@
+{% extends "todos/base.html" %}
+
+{% block content %}
+<h1>{{ todo_list.title }}</h1>
+<p>{{ todo_list.description }}</p>
+
+<h2>Задачи</h2>
+<ul class="list-group">
+    {% for todo in todos %}
+        <li class="list-group-item">
+            {{ todo.title }} - {% if todo.status %} ✅ Выполнено {% else %} ❌ В процессе {% endif %}
+            <a href="{% url 'todo_edit' todo.id %}" class="btn btn-sm btn-warning">Редактировать</a>
+            <a href="{% url 'todo_delete' todo.id %}" class="btn btn-sm btn-danger">Удалить</a>
+        </li>
+    {% empty %}
+        <p>Нет задач.</p>
+    {% endfor %}
+</ul>
+
+<!-- Форма создания задачи -->
+<h2>Добавить новую задачу</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
+
+<a href="{% url 'todo_lists' %}" class="btn btn-secondary mt-3">Назад</a>
+{% endblock %}
