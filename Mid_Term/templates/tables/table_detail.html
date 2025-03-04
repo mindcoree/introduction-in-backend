@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Table Detail{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Table Detail</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Number:</strong> {{ table.number }}</p>
+        <p><strong>Seats:</strong> {{ table.seats }}</p>
+        <p><strong>Available:</strong> {{ table.is_available|yesno:"Yes,No" }}</p>
+        <a href="{% url 'table-edit' table.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'table-delete' table.id %}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endblock %}

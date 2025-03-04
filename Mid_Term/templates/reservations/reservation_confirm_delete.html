@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Reservation{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Are you sure you want to delete this reservation?</h2>
+    </div>
+    <div class="card-body">
+        <p>Customer: {{ reservation.customer.name }}</p>
+        <p>Table: {{ reservation.table.number }}</p>
+        <p>Date: {{ reservation.date }}</p>
+        <p>Status: {{ reservation.status }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'reservation-list-create' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
