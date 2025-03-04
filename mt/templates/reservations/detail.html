@@ -1,38 +1,27 @@
-{% load static %}
 {% extends 'base.html' %}
-{% block title %}Детали брони{% endblock %}
-{% block content %}
-<h1>Детали брони</h1>
-{% if error %}
-  <div class="alert alert-danger">{{ error }}</div>
-{% endif %}
-<div class="card">
-    <p><strong>ID:</strong> {{ reservation.id }}</p>
-    <p><strong>Клиент:</strong> {{ reservation.customer.name }}</p>
-    <p><strong>Стол:</strong> {{ reservation.table.number }}</p>
-    <p><strong>Дата:</strong> {{ reservation.date }}</p>
-    <p><strong>Статус:</strong> {{ reservation.get_status_display }}</p>
-</div>
+{% block title %}Детали бронирования{% endblock %}
 
-<!-- Форма для обновления статуса брони -->
+{% block content %}
+<h2>Детали бронирования</h2>
+<p><strong>Клиент:</strong> {{ reservation.customer.username }}</p>
+<p><strong>Стол:</strong> {{ reservation.table.id }}</p>
+<p><strong>Дата:</strong> {{ reservation.date }}</p>
+<p><strong>Время:</strong> {{ reservation.time }}</p>
+<p><strong>Статус:</strong> {{ reservation.get_status_display }}</p>
+
 <form method="post">
     {% csrf_token %}
-    <div class="form-group mt-3">
-        <label for="status">Обновить статус:</label>
-        <select name="status" id="status" class="form-control">
-            {% for key, value in reservation.STATUS_CHOICES %}
-              <option value="{{ key }}" {% if reservation.status == key %}selected{% endif %}>{{ value }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Обновить статус</button>
+    <label for="status">Изменить статус:</label>
+    <select name="status">
+        {% for key, value in reservation.STATUS_CHOICES %}
+            <option value="{{ key }}">{{ value }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">Обновить</button>
 </form>
 
-<!-- Ссылка для удаления брони -->
-<form method="post" action="{% url 'reservation_delete' reservation.id %}" class="mt-3">
+<form method="post" action="{% url 'reservations:reservation_delete' reservation.id %}">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Удалить бронь</button>
+    <button type="submit" class="btn btn-danger mt-2">Удалить бронь</button>
 </form>
-
-<a href="{% url 'reservations_by_user' reservation.customer.id %}" class="btn btn-secondary mt-3">Вернуться к броням клиента</a>
 {% endblock %}

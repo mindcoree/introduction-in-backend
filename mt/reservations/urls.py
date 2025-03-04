@@ -1,11 +1,12 @@
 from django.urls import path
 from . import views
 
+app_name = 'reservations'
+
 urlpatterns = [
-    # Детали брони и обновление статуса через один URL:
+    path('', views.reservation_list, name='reservation_list'),
     path('<int:id>/', views.reservation_detail, name='reservation_detail'),
-    # Удаление брони (здесь используется POST для удаления):
+    path('create/', views.reservation_create, name='reservation_create'),
     path('<int:id>/delete/', views.reservation_delete, name='reservation_delete'),
-    # Список броней для конкретного пользователя:
     path('user/<int:user_id>/', views.reservations_by_user, name='reservations_by_user'),
 ]
