@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="mb-4">Добро пожаловать в систему бронирования</h1>
+    <p class="lead">Здесь вы можете управлять клиентами, столами и бронированиями.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Клиенты</h5>
+                    <p class="card-text">Просмотр, добавление и управление клиентами.</p>
+                    <a href="{% url 'customers_list' %}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Столы</h5>
+                    <p class="card-text">Просмотр всех столов и доступных мест.</p>
+                    <a href="{% url 'table_list' %}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Бронирования</h5>
+                    <p class="card-text">Просмотр, создание и управление бронированиями.</p>
+                    <a href="{% url 'reservations_list' %}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

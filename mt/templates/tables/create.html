@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить стол{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Добавить новый стол</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_number" class="form-label">Номер стола</label>
+            {{ form.number }}
+        </div>
+        <div class="mb-3">
+            <label for="id_seats" class="form-label">Количество мест</label>
+            {{ form.seats }}
+        </div>
+        <div class="form-check mb-3">
+            {{ form.is_available }}
+            <label class="form-check-label" for="id_is_available">Доступен</label>
+        </div>
+        <button type="submit" class="btn btn-success">Создать</button>
+    </form>
+</div>
+{% endblock %}
