@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Reservation Detail{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Reservation Detail</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Customer:</strong> {{ reservation.customer.name }}</p>
+        <p><strong>Table:</strong> {{ reservation.table.number }}</p>
+        <p><strong>Date:</strong> {{ reservation.date }}</p>
+        <p><strong>Status:</strong> {{ reservation.status }}</p>
+        <a href="{% url 'reservation-edit' reservation.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'reservation-delete' reservation.id %}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endblock %}
