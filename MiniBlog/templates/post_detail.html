@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+    <h1 class="text-3xl font-bold mb-4">{{ post.title }}</h1>
+    <p class="text-gray-600 mb-4">By {{ post.author.username }} on {{ post.created_at|date:"F d, Y" }}</p>
+    <div class="bg-white p-6 rounded shadow mb-6">
+        <p>{{ post.content }}</p>
+    </div>
+    {% if user.is_authenticated and user == post.author %}
+        <div class="mb-6 space-x-2">
+            <a href="{% url 'post_edit' post.id %}" class="bg-blue-600 text-white p-2 rounded">Edit Post</a>
+            <form method="POST" action="{% url 'post_delete' post.id %}" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="bg-red-600 text-white p-2 rounded hover:bg-red-700" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</button>
+            </form>
+        </div>
+    {% endif %}
+    <h2 class="text-2xl font-bold mb-4">Comments</h2>
+    {% if user.is_authenticated %}
+        <label class="flex items-center mb-4">
+            <input type="checkbox" id="my-comments" {% if my_comments %}checked{% endif %} class="mr-2">
+            <span class="text-gray-700">Show only my comments</span>
+        </label>
+    {% endif %}
+    <div id="comment-list" class="space-y-4">
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="bg-white p-4 rounded shadow">
+                    <p>{{ comment.text }}</p>
+                    <p class="text-sm text-gray-500">By {{ comment.author.username }} on {{ comment.created_at|date:"F d, Y" }}</p>
+                    {% if user.is_authenticated and user == comment.author %}
+                        <a href="{% url 'comment_delete' comment.id %}" class="text-red-500 hover:underline" onclick="return confirm('Are you sure?')">Delete</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-gray-600">No comments yet.</p>
+        {% endif %}
+    </div>
+    {% if user.is_authenticated %}
+        <h3 class="text-xl font-semibold mt-6 mb-4">Add a Comment</h3>
+        <form method="POST" class="bg-white p-6 rounded shadow">
+            {% csrf_token %}
+            <textarea name="text" rows="4" class="border p-2 rounded w-full" placeholder="Your comment..." required></textarea>
+            <button type="submit" class="bg-blue-600 text-white p-2 rounded mt-2">Submit Comment</button>
+        </form>
+    {% else %}
+        <p class="text-gray-600 mt-6">Please <a href="{% url 'login' %}?next={{ request.path }}" class="text-blue-600 hover:underline">log in</a> to add a comment.</p>
+    {% endif %}
+
+    <script>
+        document.getElementById('my-comments')?.addEventListener('change', function() {
+            const myComments = this.checked;
+            const url = new URL(window.location.href);
+            if (myComments) {
+                url.searchParams.set('my_comments', 'true');
+            } else {
+                url.searchParams.delete('my_comments');
+            }
+            window.location.href = url.toString();
+        });
+    </script>
+{% endblock %}
